@@ -70,6 +70,16 @@ class CourseView:
             columnspan=2
         )
 
+        self.button_delete_course = Button(
+            self.frame_courses,
+            text="Usuń kurs"
+        )
+
+        self.button_delete_course.grid(
+            row=6,
+            column=1,
+            columnspan=2
+        )
         # ===== UCZESTNICY =====
 
         self.frame_participants = Frame(root)
