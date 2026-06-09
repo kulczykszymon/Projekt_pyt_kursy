@@ -1,8 +1,15 @@
 from tkinter import Tk
+
 from view import CourseView
+from controller import add_course
 
 
-if __name__ == "__main__":
-    root = Tk()
-    view = CourseView(root)
-    root.mainloop()
+root = Tk()
+
+view = CourseView(root)
+
+view.button_add_course.config(
+    command=lambda: add_course(view)
+)
+
+root.mainloop()
