@@ -1,4 +1,11 @@
-from model import Course, courses
+from model import (
+    Course,
+    Participant,
+    Enrollment,
+    courses,
+    participants,
+    enrollments
+)
 
 
 def add_course(view):
@@ -80,3 +87,110 @@ def update_course(view, index):
         text="Dodaj kurs",
         command=lambda: add_course(view)
     )
+
+# ===== UCZESTNICY =====
+
+def add_participant(view):
+    name = view.entry_participant_name.get()
+    email = view.entry_participant_email.get()
+
+    if name == "" or email == "":
+        return
+
+    participant = Participant(name, email)
+    participants.append(participant)
+
+    view.listbox_participants.insert(
+        "end",
+        f"{name} | {email}"
+    )
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
+
+
+def delete_participant(view):
+    selected = view.listbox_participants.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    view.listbox_participants.delete(index)
+    participants.pop(index)
+
+
+def edit_participant(view):
+    selected = view.listbox_participants.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    participant = participants[index]
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
+
+    view.entry_participant_name.insert(
+        0,
+        participant.name
+    )
+
+    view.entry_participant_email.insert(
+        0,
+        participant.email
+    )
+
+    view.button_add_participant.config(
+        text="Zapisz zmiany",
+        command=lambda: update_participant(view, index)
+    )
+
+
+def update_participant(view, index):
+    participant = participants[index]
+
+    participant.name = view.entry_participant_name.get()
+    participant.email = view.entry_participant_email.get()
+
+    view.listbox_participants.delete(index)
+
+    view.listbox_participants.insert(
+        index,
+        f"{participant.name} | {participant.email}"
+    )
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
+
+    view.button_add_participant.config(
+        text="Dodaj uczestnika",
+        command=lambda: add_participant(view)
+    )
+
+# ===== ZAPISY =====
+
+def add_enrollment(view):
+    course_title = view.entry_enrollment_course.get()
+    participant_name = view.entry_enrollment_participant.get()
+
+    if course_title == "" or participant_name == "":
+        return
+
+    enrollment = Enrollment(
+        course_title,
+        participant_name
+    )
+
+    enrollments.append(enrollment)
+
+    view.listbox_enrollments.insert(
+        "end",
+        f"{participant_name} -> {course_title}"
+    )
+
+    view.entry_enrollment_course.delete(0, "end")
+    view.entry_enrollment_participant.delete(0, "end")

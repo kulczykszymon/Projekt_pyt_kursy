@@ -1,22 +1,26 @@
-class Course:
-    def __init__(self, title, category, instructor):
-        self.title = title
-        self.category = category
-        self.instructor = instructor
-
-
-class Participant:
-    def __init__(self, name, email):
+class Company:
+    def __init__(self, name, x, y):
         self.name = name
-        self.email = email
+        self.x = x
+        self.y = y
 
 
-class Enrollment:
-    def __init__(self, course_title, participant_name):
-        self.course_title = course_title
-        self.participant_name = participant_name
+class Client:
+    def __init__(self, name, company, x, y):
+        self.name = name
+        self.company = company
+        self.x = x
+        self.y = y
 
 
-courses = []
-participants = []
-enrollments = []
+class Employee:
+    def __init__(self, name, company, x, y):
+        self.name = name
+        self.company = company
+        self.x = x
+        self.y = y
+
+
+companies = []
+clients = []
+employees = []
