@@ -202,7 +202,7 @@ class CourseView:
 
         Label(
             self.frame_employees,
-            text="Nazwa:"
+            text="Imię:"
         ).grid(row=2, column=1, sticky=W)
 
         self.entry_employee_name = Entry(
