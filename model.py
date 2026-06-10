@@ -1,24 +1,32 @@
 class Company:
-    def __init__(self, name, x, y):
+    def __init__(self, name, city, address):
         self.name = name
-        self.x = x
-        self.y = y
+        self.city = city
+        self.address = address
+
+        # współrzędne pobierane automatycznie
+        self.latitude = None
+        self.longitude = None
 
 
 class Client:
-    def __init__(self, name, company, x, y):
+    def __init__(self, name, company, city):
         self.name = name
         self.company = company
-        self.x = x
-        self.y = y
+        self.city = city
+
+        self.latitude = None
+        self.longitude = None
 
 
 class Employee:
-    def __init__(self, name, company, x, y):
+    def __init__(self, name, company, city):
         self.name = name
         self.company = company
-        self.x = x
-        self.y = y
+        self.city = city
+
+        self.latitude = None
+        self.longitude = None
 
 
 companies = []
