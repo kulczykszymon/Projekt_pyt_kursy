@@ -1,9 +1,9 @@
 from tkinter import *
 
-
 class CourseView:
     def __init__(self, root):
         self.root = root
+
 
         self.root.title("System zarządzania kursami online")
         self.root.geometry("900x600")
@@ -29,7 +29,7 @@ class CourseView:
             width=30,
             height=15
         )
-        self.listbox_courses.grid(row=1, column=0, rowspan=6)
+        self.listbox_courses.grid(row=1, column=0, rowspan=7)
 
         Label(
             self.frame_courses,
@@ -74,12 +74,22 @@ class CourseView:
             self.frame_courses,
             text="Usuń kurs"
         )
-
         self.button_delete_course.grid(
             row=6,
             column=1,
             columnspan=2
         )
+
+        self.button_edit_course = Button(
+            self.frame_courses,
+            text="Edytuj kurs"
+        )
+        self.button_edit_course.grid(
+            row=7,
+            column=1,
+            columnspan=2
+        )
+
         # ===== UCZESTNICY =====
 
         self.frame_participants = Frame(root)

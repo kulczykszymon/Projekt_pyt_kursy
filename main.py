@@ -1,8 +1,12 @@
 from tkinter import Tk
 
 from view import CourseView
-from controller import add_course, delete_course
 
+from controller import (
+    add_course,
+    delete_course,
+    edit_course
+)
 
 root = Tk()
 
@@ -14,6 +18,10 @@ view.button_add_course.config(
 
 view.button_delete_course.config(
     command=lambda: delete_course(view)
+)
+
+view.button_edit_course.config(
+    command=lambda: edit_course(view)
 )
 
 root.mainloop()
