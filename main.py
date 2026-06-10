@@ -3,48 +3,25 @@ from tkinter import Tk
 from view import CourseView
 
 from controller import (
-    add_course,
-    delete_course,
-    edit_course,
-    add_participant,
-    delete_participant,
-    edit_participant,
-    add_enrollment
+    add_company,
+    delete_company,
+    edit_company
 )
 
 root = Tk()
 
 view = CourseView(root)
 
-# KURSY
-
-view.button_add_course.config(
-    command=lambda: add_course(view)
+view.button_add_company.config(
+    command=lambda: add_company(view)
 )
 
-view.button_delete_course.config(
-    command=lambda: delete_course(view)
+view.button_delete_company.config(
+    command=lambda: delete_company(view)
 )
 
-view.button_edit_course.config(
-    command=lambda: edit_course(view)
+view.button_edit_company.config(
+    command=lambda: edit_company(view)
 )
 
-# UCZESTNICY
-
-view.button_add_participant.config(
-    command=lambda: add_participant(view)
-)
-
-view.button_delete_participant.config(
-    command=lambda: delete_participant(view)
-)
-
-view.button_edit_participant.config(
-    command=lambda: edit_participant(view)
-)
-
-view.button_add_enrollment.config(
-    command=lambda: add_enrollment(view)
-)
 root.mainloop()

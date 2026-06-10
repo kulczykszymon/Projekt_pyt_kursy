@@ -1,12 +1,12 @@
 from tkinter import *
 
+
 class CourseView:
     def __init__(self, root):
         self.root = root
 
-
         self.root.title("System zarządzania kursami online")
-        self.root.geometry("900x600")
+        self.root.geometry("1200x700")
 
         Label(
             root,
@@ -14,212 +14,248 @@ class CourseView:
             font=("Arial", 16, "bold")
         ).grid(row=0, column=0, columnspan=3, pady=10)
 
-        # ===== KURSY =====
+        # ================= FIRMY =================
 
-        self.frame_courses = Frame(root)
-        self.frame_courses.grid(row=1, column=0, padx=20, pady=20)
+        self.frame_companies = Frame(root)
+        self.frame_companies.grid(row=1, column=0, padx=20, pady=20)
 
         Label(
-            self.frame_courses,
-            text="KURSY"
+            self.frame_companies,
+            text="FIRMY"
         ).grid(row=0, column=0, sticky=W)
 
-        self.listbox_courses = Listbox(
-            self.frame_courses,
+        self.listbox_companies = Listbox(
+            self.frame_companies,
             width=30,
             height=15
         )
-        self.listbox_courses.grid(row=1, column=0, rowspan=7)
+        self.listbox_companies.grid(row=1, column=0, rowspan=8)
 
         Label(
-            self.frame_courses,
-            text="Formularz kursu"
+            self.frame_companies,
+            text="Formularz firmy"
         ).grid(row=1, column=1, columnspan=2)
 
         Label(
-            self.frame_courses,
+            self.frame_companies,
             text="Nazwa:"
         ).grid(row=2, column=1, sticky=W)
 
-        self.entry_course_title = Entry(self.frame_courses)
-        self.entry_course_title.grid(row=2, column=2)
+        self.entry_company_name = Entry(
+            self.frame_companies
+        )
+        self.entry_company_name.grid(row=2, column=2)
 
         Label(
-            self.frame_courses,
-            text="Kategoria:"
+            self.frame_companies,
+            text="Miasto:"
         ).grid(row=3, column=1, sticky=W)
 
-        self.entry_course_category = Entry(self.frame_courses)
-        self.entry_course_category.grid(row=3, column=2)
+        self.entry_company_city = Entry(
+            self.frame_companies
+        )
+        self.entry_company_city.grid(row=3, column=2)
 
         Label(
-            self.frame_courses,
-            text="Prowadzący:"
+            self.frame_companies,
+            text="Adres:"
         ).grid(row=4, column=1, sticky=W)
 
-        self.entry_course_instructor = Entry(self.frame_courses)
-        self.entry_course_instructor.grid(row=4, column=2)
-
-        self.button_add_course = Button(
-            self.frame_courses,
-            text="Dodaj kurs"
+        self.entry_company_address = Entry(
+            self.frame_companies
         )
-        self.button_add_course.grid(
+        self.entry_company_address.grid(row=4, column=2)
+
+        self.button_add_company = Button(
+            self.frame_companies,
+            text="Dodaj firmę"
+        )
+        self.button_add_company.grid(
             row=5,
             column=1,
             columnspan=2
         )
 
-        self.button_delete_course = Button(
-            self.frame_courses,
-            text="Usuń kurs"
+        self.button_delete_company = Button(
+            self.frame_companies,
+            text="Usuń firmę"
         )
-        self.button_delete_course.grid(
+        self.button_delete_company.grid(
             row=6,
             column=1,
             columnspan=2
         )
 
-        self.button_edit_course = Button(
-            self.frame_courses,
-            text="Edytuj kurs"
+        self.button_edit_company = Button(
+            self.frame_companies,
+            text="Edytuj firmę"
         )
-        self.button_edit_course.grid(
+        self.button_edit_company.grid(
             row=7,
             column=1,
             columnspan=2
         )
 
-        # ===== UCZESTNICY =====
+        # ================= KLIENCI =================
 
-        self.frame_participants = Frame(root)
-        self.frame_participants.grid(row=1, column=1, padx=20)
+        self.frame_clients = Frame(root)
+        self.frame_clients.grid(row=1, column=1, padx=20)
 
         Label(
-            self.frame_participants,
-            text="UCZESTNICY"
+            self.frame_clients,
+            text="KLIENCI"
         ).grid(row=0, column=0, sticky=W)
 
-        self.listbox_participants = Listbox(
-            self.frame_participants,
+        self.listbox_clients = Listbox(
+            self.frame_clients,
             width=30,
             height=15
         )
-        self.listbox_participants.grid(row=1, column=0, rowspan=7)
+        self.listbox_clients.grid(row=1, column=0, rowspan=8)
 
         Label(
-            self.frame_participants,
-            text="Formularz uczestnika"
+            self.frame_clients,
+            text="Formularz klienta"
         ).grid(row=1, column=1, columnspan=2)
 
         Label(
-            self.frame_participants,
-            text="Imię:"
+            self.frame_clients,
+            text="Nazwa:"
         ).grid(row=2, column=1, sticky=W)
 
-        self.entry_participant_name = Entry(
-            self.frame_participants
+        self.entry_client_name = Entry(
+            self.frame_clients
         )
-        self.entry_participant_name.grid(row=2, column=2)
+        self.entry_client_name.grid(row=2, column=2)
 
         Label(
-            self.frame_participants,
-            text="Email:"
+            self.frame_clients,
+            text="Firma:"
         ).grid(row=3, column=1, sticky=W)
 
-        self.entry_participant_email = Entry(
-            self.frame_participants
+        self.entry_client_company = Entry(
+            self.frame_clients
         )
-        self.entry_participant_email.grid(row=3, column=2)
+        self.entry_client_company.grid(row=3, column=2)
 
-        self.button_add_participant = Button(
-            self.frame_participants,
-            text="Dodaj uczestnika"
-        )
-        self.button_add_participant.grid(
-            row=4,
-            column=1,
-            columnspan=2
-        )
+        Label(
+            self.frame_clients,
+            text="Miasto:"
+        ).grid(row=4, column=1, sticky=W)
 
-        self.button_delete_participant = Button(
-            self.frame_participants,
-            text="Usuń uczestnika"
+        self.entry_client_city = Entry(
+            self.frame_clients
         )
-        self.button_delete_participant.grid(
+        self.entry_client_city.grid(row=4, column=2)
+
+        self.button_add_client = Button(
+            self.frame_clients,
+            text="Dodaj klienta"
+        )
+        self.button_add_client.grid(
             row=5,
             column=1,
             columnspan=2
         )
 
-        self.button_edit_participant = Button(
-            self.frame_participants,
-            text="Edytuj uczestnika"
+        self.button_delete_client = Button(
+            self.frame_clients,
+            text="Usuń klienta"
         )
-        self.button_edit_participant.grid(
+        self.button_delete_client.grid(
             row=6,
             column=1,
             columnspan=2
         )
 
-        # ===== ZAPISY =====
-
-        self.frame_enrollments = Frame(root)
-        self.frame_enrollments.grid(row=1, column=2, padx=20)
-
-        Label(
-            self.frame_enrollments,
-            text="ZAPISY"
-        ).grid(row=0, column=0, sticky=W)
-
-        self.listbox_enrollments = Listbox(
-            self.frame_enrollments,
-            width=30,
-            height=15
+        self.button_edit_client = Button(
+            self.frame_clients,
+            text="Edytuj klienta"
         )
-        self.listbox_enrollments.grid(row=1, column=0, rowspan=6)
-
-        Label(
-            self.frame_enrollments,
-            text="Formularz zapisu"
-        ).grid(row=1, column=1, columnspan=2)
-
-        Label(
-            self.frame_enrollments,
-            text="Kurs:"
-        ).grid(row=2, column=1, sticky=W)
-
-        self.entry_enrollment_course = Entry(
-            self.frame_enrollments
-        )
-        self.entry_enrollment_course.grid(row=2, column=2)
-
-        Label(
-            self.frame_enrollments,
-            text="Uczestnik:"
-        ).grid(row=3, column=1, sticky=W)
-
-        self.entry_enrollment_participant = Entry(
-            self.frame_enrollments
-        )
-        self.entry_enrollment_participant.grid(row=3, column=2)
-
-        self.button_add_enrollment = Button(
-            self.frame_enrollments,
-            text="Dodaj zapis"
-        )
-        self.button_add_enrollment.grid(
-            row=4,
+        self.button_edit_client.grid(
+            row=7,
             column=1,
             columnspan=2
         )
 
-        self.button_delete_enrollment = Button(
-            self.frame_enrollments,
-            text="Usuń zapis"
+        # ================= PRACOWNICY =================
+
+        self.frame_employees = Frame(root)
+        self.frame_employees.grid(row=1, column=2, padx=20)
+
+        Label(
+            self.frame_employees,
+            text="PRACOWNICY"
+        ).grid(row=0, column=0, sticky=W)
+
+        self.listbox_employees = Listbox(
+            self.frame_employees,
+            width=30,
+            height=15
         )
-        self.button_delete_enrollment.grid(
+        self.listbox_employees.grid(row=1, column=0, rowspan=8)
+
+        Label(
+            self.frame_employees,
+            text="Formularz pracownika"
+        ).grid(row=1, column=1, columnspan=2)
+
+        Label(
+            self.frame_employees,
+            text="Nazwa:"
+        ).grid(row=2, column=1, sticky=W)
+
+        self.entry_employee_name = Entry(
+            self.frame_employees
+        )
+        self.entry_employee_name.grid(row=2, column=2)
+
+        Label(
+            self.frame_employees,
+            text="Firma:"
+        ).grid(row=3, column=1, sticky=W)
+
+        self.entry_employee_company = Entry(
+            self.frame_employees
+        )
+        self.entry_employee_company.grid(row=3, column=2)
+
+        Label(
+            self.frame_employees,
+            text="Miasto:"
+        ).grid(row=4, column=1, sticky=W)
+
+        self.entry_employee_city = Entry(
+            self.frame_employees
+        )
+        self.entry_employee_city.grid(row=4, column=2)
+
+        self.button_add_employee = Button(
+            self.frame_employees,
+            text="Dodaj pracownika"
+        )
+        self.button_add_employee.grid(
             row=5,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_delete_employee = Button(
+            self.frame_employees,
+            text="Usuń pracownika"
+        )
+        self.button_delete_employee.grid(
+            row=6,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_edit_employee = Button(
+            self.frame_employees,
+            text="Edytuj pracownika"
+        )
+        self.button_edit_employee.grid(
+            row=7,
             column=1,
             columnspan=2
         )
