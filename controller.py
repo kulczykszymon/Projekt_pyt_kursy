@@ -1,4 +1,4 @@
-from model import Course, courses
+from model import Course, Participant, courses, participants
 
 
 def add_course(view):
@@ -80,3 +80,20 @@ def update_course(view, index):
         text="Dodaj kurs",
         command=lambda: add_course(view)
     )
+def add_participant(view):
+    name = view.entry_participant_name.get()
+    email = view.entry_participant_email.get()
+
+    if name == "" or email == "":
+        return
+
+    participant = Participant(name, email)
+    participants.append(participant)
+
+    view.listbox_participants.insert(
+        "end",
+        f"{name} | {email}"
+    )
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
