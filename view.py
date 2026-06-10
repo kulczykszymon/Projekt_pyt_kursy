@@ -98,28 +98,66 @@ class CourseView:
         Label(
             self.frame_participants,
             text="UCZESTNICY"
-        ).grid(row=0, column=0)
+        ).grid(row=0, column=0, sticky=W)
 
         self.listbox_participants = Listbox(
             self.frame_participants,
             width=30,
             height=15
         )
-        self.listbox_participants.grid(row=1, column=0)
-
-        # ===== ZAPISY =====
-
-        self.frame_enrollments = Frame(root)
-        self.frame_enrollments.grid(row=1, column=2, padx=20)
+        self.listbox_participants.grid(row=1, column=0, rowspan=7)
 
         Label(
-            self.frame_enrollments,
-            text="ZAPISY"
-        ).grid(row=0, column=0)
+            self.frame_participants,
+            text="Formularz uczestnika"
+        ).grid(row=1, column=1, columnspan=2)
 
-        self.listbox_enrollments = Listbox(
-            self.frame_enrollments,
-            width=30,
-            height=15
+        Label(
+            self.frame_participants,
+            text="Imię:"
+        ).grid(row=2, column=1, sticky=W)
+
+        self.entry_participant_name = Entry(
+            self.frame_participants
         )
-        self.listbox_enrollments.grid(row=1, column=0)
+        self.entry_participant_name.grid(row=2, column=2)
+
+        Label(
+            self.frame_participants,
+            text="Email:"
+        ).grid(row=3, column=1, sticky=W)
+
+        self.entry_participant_email = Entry(
+            self.frame_participants
+        )
+        self.entry_participant_email.grid(row=3, column=2)
+
+        self.button_add_participant = Button(
+            self.frame_participants,
+            text="Dodaj uczestnika"
+        )
+        self.button_add_participant.grid(
+            row=4,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_delete_participant = Button(
+            self.frame_participants,
+            text="Usuń uczestnika"
+        )
+        self.button_delete_participant.grid(
+            row=5,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_edit_participant = Button(
+            self.frame_participants,
+            text="Edytuj uczestnika"
+        )
+        self.button_edit_participant.grid(
+            row=6,
+            column=1,
+            columnspan=2
+        )
