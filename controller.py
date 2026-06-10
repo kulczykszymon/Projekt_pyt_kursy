@@ -97,3 +97,14 @@ def add_participant(view):
 
     view.entry_participant_name.delete(0, "end")
     view.entry_participant_email.delete(0, "end")
+
+def delete_participant(view):
+    selected = view.listbox_participants.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    view.listbox_participants.delete(index)
+    participants.pop(index)
