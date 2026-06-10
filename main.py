@@ -7,7 +7,8 @@ from controller import (
     delete_course,
     edit_course,
     add_participant,
-    delete_participant
+    delete_participant,
+    edit_participant
 )
 root = Tk()
 
@@ -31,5 +32,9 @@ view.button_add_participant.config(
 
 view.button_delete_participant.config(
     command=lambda: delete_participant(view)
+)
+
+view.button_edit_participant.config(
+    command=lambda: edit_participant(view)
 )
 root.mainloop()

@@ -108,3 +108,53 @@ def delete_participant(view):
 
     view.listbox_participants.delete(index)
     participants.pop(index)
+
+def edit_participant(view):
+    selected = view.listbox_participants.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    participant = participants[index]
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
+
+    view.entry_participant_name.insert(
+        0,
+        participant.name
+    )
+
+    view.entry_participant_email.insert(
+        0,
+        participant.email
+    )
+
+    view.button_add_participant.config(
+        text="Zapisz zmiany",
+        command=lambda: update_participant(view, index)
+    )
+
+
+def update_participant(view, index):
+    participant = participants[index]
+
+    participant.name = view.entry_participant_name.get()
+    participant.email = view.entry_participant_email.get()
+
+    view.listbox_participants.delete(index)
+
+    view.listbox_participants.insert(
+        index,
+        f"{participant.name} | {participant.email}"
+    )
+
+    view.entry_participant_name.delete(0, "end")
+    view.entry_participant_email.delete(0, "end")
+
+    view.button_add_participant.config(
+        text="Dodaj uczestnika",
+        command=lambda: add_participant(view)
+    )
