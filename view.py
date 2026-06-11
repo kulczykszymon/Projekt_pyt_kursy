@@ -1,4 +1,5 @@
 from tkinter import *
+from tkintermapview import TkinterMapView
 
 
 class CourseView:
@@ -6,7 +7,7 @@ class CourseView:
         self.root = root
 
         self.root.title("System zarządzania kursami online")
-        self.root.geometry("1200x700")
+        self.root.geometry("1200x900")
 
         Label(
             root,
@@ -96,6 +97,37 @@ class CourseView:
             columnspan=2
         )
 
+        Label(
+            self.frame_companies,
+            text="Filtr:"
+        ).grid(row=8, column=1)
+
+        self.entry_filter_company = Entry(
+            self.frame_companies
+        )
+        self.entry_filter_company.grid(row=8, column=2)
+
+        self.button_filter_company = Button(
+            self.frame_companies,
+            text="Filtruj"
+        )
+        self.button_filter_company.grid(
+            row=9,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_show_courses = Button(
+            self.frame_companies,
+            text="Pokaż kursy firmy"
+        )
+
+        self.button_show_courses.grid(
+            row=10,
+            column=1,
+            columnspan=2
+        )
+
         # ================= KLIENCI =================
 
         self.frame_clients = Frame(root)
@@ -174,6 +206,26 @@ class CourseView:
         )
         self.button_edit_client.grid(
             row=7,
+            column=1,
+            columnspan=2
+        )
+
+        Label(
+            self.frame_clients,
+            text="Filtr:"
+        ).grid(row=10, column=1)
+
+        self.entry_filter_client = Entry(
+            self.frame_clients
+        )
+        self.entry_filter_client.grid(row=10, column=2)
+
+        self.button_filter_client = Button(
+            self.frame_clients,
+            text="Filtruj"
+        )
+        self.button_filter_client.grid(
+            row=11,
             column=1,
             columnspan=2
         )
@@ -258,4 +310,133 @@ class CourseView:
             row=7,
             column=1,
             columnspan=2
+        )
+
+        self.button_show_company_clients = Button(
+            self.frame_clients,
+            text="Pokaż klientów firmy"
+        )
+
+        self.button_show_company_clients.grid(
+            row=8,
+            column=1,
+            columnspan=2
+
+
+)
+        self.button_show_all_clients = Button(
+            self.frame_clients,
+            text="Pokaż wszystkich klientów"
+        )
+
+        self.button_show_all_clients.grid(
+            row=9,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_show_company_employees = Button(
+            self.frame_employees,
+            text="Pokaż pracowników firmy"
+        )
+
+        self.button_show_company_employees.grid(
+            row=8,
+            column=1,
+            columnspan=2
+        )
+
+        self.button_show_all_employees = Button(
+            self.frame_employees,
+            text="Pokaż wszystkich pracowników"
+        )
+
+        self.button_show_all_employees.grid(
+            row=9,
+            column=1,
+            columnspan=2
+        )
+
+        Label(
+            self.frame_employees,
+            text="Filtr:"
+        ).grid(row=10, column=1)
+
+        self.entry_filter_employee = Entry(
+            self.frame_employees
+        )
+        self.entry_filter_employee.grid(row=10, column=2)
+
+        self.button_filter_employee = Button(
+            self.frame_employees,
+            text="Filtruj"
+        )
+        self.button_filter_employee.grid(
+            row=11,
+            column=1,
+            columnspan=2
+        )
+
+# ================= MAPA =================
+
+        self.map_widget = TkinterMapView(
+            root,
+            width=1100,
+            height=500
+        )
+
+        self.map_widget.grid(
+            row=2,
+            column=0,
+            columnspan=3,
+            padx=20,
+            pady=20
+        )
+
+        self.map_widget.set_position(
+            52.2297,
+            21.0122
+        )
+
+        self.map_widget.set_zoom(6)
+
+# ================= KURSY =================
+
+        self.frame_courses = Frame(root)
+        self.frame_courses.grid(row=1, column=3, padx=20)
+
+        Label(
+            self.frame_courses,
+            text="KURSY FIRMY"
+        ).grid(row=0, column=0)
+
+        self.listbox_courses = Listbox(
+            self.frame_courses,
+            width=30,
+            height=15
+        )
+
+        self.listbox_courses.grid(
+            row=1,
+            column=0
+        )
+        Label(
+            self.frame_courses,
+            text="Nazwa kursu:"
+        ).grid(row=2, column=0)
+
+        self.entry_course_name = Entry(
+            self.frame_courses,
+            width=25
+        )
+        self.entry_course_name.grid(row=3, column=0)
+
+        self.button_add_course = Button(
+            self.frame_courses,
+            text="Dodaj kurs"
+        )
+
+        self.button_add_course.grid(
+            row=4,
+            column=0
         )

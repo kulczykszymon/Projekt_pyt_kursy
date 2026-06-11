@@ -8,6 +8,8 @@ class Company:
         self.latitude = None
         self.longitude = None
 
+        self.courses = []
+
 
 class Client:
     def __init__(self, name, company, city):

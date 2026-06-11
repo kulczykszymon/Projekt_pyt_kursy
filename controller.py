@@ -7,6 +7,11 @@ from model import (
     employees
 )
 
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(
+    user_agent="kursy_online"
+)
 
 # ===== FIRMY =====
 
@@ -24,12 +29,34 @@ def add_company(view):
         address
     )
 
+    location = geolocator.geocode(
+        f"{address}, {city}"
+    )
+
+    if location:
+        company.latitude = location.latitude
+        company.longitude = location.longitude
+
     companies.append(company)
 
     view.listbox_companies.insert(
         "end",
         f"{name} | {city}"
     )
+
+    if company.latitude and company.longitude:
+        view.map_widget.set_marker(
+            company.latitude,
+            company.longitude,
+            text=company.name
+        )
+
+        view.map_widget.set_position(
+            company.latitude,
+            company.longitude
+        )
+
+        view.map_widget.set_zoom(12)
 
     view.entry_company_name.delete(0, "end")
     view.entry_company_city.delete(0, "end")
@@ -46,6 +73,17 @@ def delete_company(view):
 
     view.listbox_companies.delete(index)
     companies.pop(index)
+
+    view.map_widget.delete_all_marker()
+
+
+    for company in companies:
+        if company.latitude and company.longitude:
+            view.map_widget.set_marker(
+                company.latitude,
+                company.longitude,
+                text=company.name
+            )
 
 
 def edit_company(view):
@@ -90,12 +128,30 @@ def update_company(view, index):
     company.city = view.entry_company_city.get()
     company.address = view.entry_company_address.get()
 
+    location = geolocator.geocode(
+        f"{company.address}, {company.city}"
+    )
+
+    if location:
+        company.latitude = location.latitude
+        company.longitude = location.longitude
+
     view.listbox_companies.delete(index)
 
     view.listbox_companies.insert(
         index,
         f"{company.name} | {company.city}"
     )
+
+    view.map_widget.delete_all_marker()
+
+    for company in companies:
+        if company.latitude and company.longitude:
+            view.map_widget.set_marker(
+                company.latitude,
+                company.longitude,
+                text=company.name
+            )
 
     view.entry_company_name.delete(0, "end")
     view.entry_company_city.delete(0, "end")
@@ -121,6 +177,12 @@ def add_client(view):
         company,
         city
     )
+
+    location = geolocator.geocode(city)
+
+    if location:
+        client.latitude = location.latitude
+        client.longitude = location.longitude
 
     clients.append(client)
 
@@ -209,6 +271,12 @@ def add_employee(view):
         city
     )
 
+    location = geolocator.geocode(city)
+
+    if location:
+        employee.latitude = location.latitude
+        employee.longitude = location.longitude
+
     employees.append(employee)
 
     view.listbox_employees.insert(
@@ -279,3 +347,143 @@ def update_employee(view, index):
         text="Dodaj pracownika",
         command=lambda: add_employee(view)
     )
+
+def show_company_clients(view):
+    selected = view.listbox_companies.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    company = companies[index]
+
+    view.listbox_clients.delete(
+        0,
+        "end"
+    )
+
+    for client in clients:
+        if client.company == company.name:
+            view.listbox_clients.insert(
+                "end",
+                f"{client.name} | {client.company}"
+            )
+
+def show_all_clients(view):
+    view.listbox_clients.delete(0, "end")
+
+    for client in clients:
+        view.listbox_clients.insert(
+            "end",
+            f"{client.name} | {client.company}"
+        )
+
+def show_company_employees(view):
+    selected = view.listbox_companies.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    company = companies[index]
+
+    view.listbox_employees.delete(0, "end")
+
+    for employee in employees:
+        if employee.company == company.name:
+            view.listbox_employees.insert(
+                "end",
+                f"{employee.name} | {employee.company}"
+            )
+
+
+def show_all_employees(view):
+    view.listbox_employees.delete(0, "end")
+
+    for employee in employees:
+        view.listbox_employees.insert(
+            "end",
+            f"{employee.name} | {employee.company}"
+        )
+
+def filter_companies(view):
+    phrase = view.entry_filter_company.get().lower()
+
+    view.listbox_companies.delete(0, "end")
+
+    for company in companies:
+        if phrase in company.name.lower():
+            view.listbox_companies.insert(
+                "end",
+                f"{company.name} | {company.city}"
+            )
+
+
+def filter_clients(view):
+    phrase = view.entry_filter_client.get().lower()
+
+    view.listbox_clients.delete(0, "end")
+
+    for client in clients:
+        if phrase in client.name.lower():
+            view.listbox_clients.insert(
+                "end",
+                f"{client.name} | {client.company}"
+            )
+
+
+def filter_employees(view):
+    phrase = view.entry_filter_employee.get().lower()
+
+    view.listbox_employees.delete(0, "end")
+
+    for employee in employees:
+        if phrase in employee.name.lower():
+            view.listbox_employees.insert(
+                "end",
+                f"{employee.name} | {employee.company}"
+            )
+
+def show_company_courses(view):
+    selected = view.listbox_companies.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    company = companies[index]
+
+    view.listbox_courses.delete(
+        0,
+        "end"
+    )
+
+    for course in company.courses:
+        view.listbox_courses.insert(
+            "end",
+            course
+        )
+
+def add_course(view):
+    selected = view.listbox_companies.curselection()
+
+    if not selected:
+        return
+
+    index = selected[0]
+
+    company = companies[index]
+
+    course_name = view.entry_course_name.get()
+
+    if course_name == "":
+        return
+
+    company.courses.append(course_name)
+
+    view.entry_course_name.delete(0, "end")
+
+    show_company_courses(view)
