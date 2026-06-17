@@ -487,3 +487,4 @@ def add_course(view):
     view.entry_course_name.delete(0, "end")
 
     show_company_courses(view)
+

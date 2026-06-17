@@ -11,6 +11,7 @@ class Company:
         self.courses = []
 
 
+
 class Client:
     def __init__(self, name, company, city):
         self.name = name
